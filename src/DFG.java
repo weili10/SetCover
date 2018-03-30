@@ -14,6 +14,7 @@ public class DFG {
 	private int setIndex;
 	private int max_k;
 	private int p;
+	
 	public DFG() {
 		this.A = new ArrayList<Integer>();
 		this.C = new HashSet<String>();
@@ -25,7 +26,7 @@ public class DFG {
 		this.p = 2;
 	}
 	
-	private void addToSetMap(int index, Set<String> set){
+	private void updateSetMap(int index, Set<String> set){
 		int k = (int) (Math.log(set.size())/Math.log(this.p));
 		
 		if(this.SetMap.containsKey(k)){
@@ -45,7 +46,7 @@ public class DFG {
 	
 	public void add(Set<String> set){
 		this.Sets.add(set);
-		this.addToSetMap(this.setIndex, set);
+		this.updateSetMap(this.setIndex, set);
 		this.U.addAll(set);
 		this.setIndex ++;
 	}
@@ -63,7 +64,7 @@ public class DFG {
 						this.C.addAll(set);
 					}else{
 						if(set.size()>0){
-							this.addToSetMap(index, set);
+							this.updateSetMap(index, set);
 							this.Sets.set(index, set);
 						}
 					}
